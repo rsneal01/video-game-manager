@@ -68,7 +68,7 @@
         end
     end
 
-    delete '/tweets/:id' do
+    delete '/games/:id' do
         # if logged in and game belongs to user, lets user delete their game
         @user = User.find_by(params[:id])
         @game = Game.find_by(params[:id])
