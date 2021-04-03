@@ -1,0 +1,7 @@
+<h1> Welcome, <%= @user.username %> </h1>
+<p>
+    <% Game.all.each do |game| %>
+        <%= game.name %>
+        <%= game.genre %>
+    <% end %>
+</p>

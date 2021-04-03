@@ -1,17 +1,16 @@
-class User < ActiveRecord::Base
-    has_secure_password
-    has_many :games
-  
+class Game < ActiveRecord::Base
+    belongs_to :user
+
     def slug
-      @slug = self.username.parameterize
-      @slug
+        @slug = self.name.parameterize
+        @slug
     end
-  
+
     def self.find_by_slug(slug)
-      @user = User.all.find do |user|
-          user.slug == slug
-      end
-      @user     
+        @song = Song.all.find do |song|
+            song.slug == slug
+        end
+        @song     
     end
-  
-  end
+    
+end
