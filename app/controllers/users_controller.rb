@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     end
   
     get '/users/:slug' do
-      
+      # Why are we displaying ALL games, instead of a specific user's games.  
       # shows all a single users games
       @user = User.find_by_slug(params[:slug])
       # binding.pry
@@ -64,6 +64,9 @@ class UsersController < ApplicationController
   
     end
   end
+
+
+  
 
   # stretch feature: Friends List.
   # stretch feature: Games has_many users association, allowing Game model to display all the users who play a certain game

@@ -21,8 +21,9 @@
 
     post '/games' do
         if Helpers.is_logged_in?(session) && params[:name] != "" && params[:name] != nil
-            @user = User.find_by(params[:id])
-            @game = Game.create(:name => params[:name], genre: params[:genre])
+            # binding.pry
+            @user = Helpers.current_user(session)
+            @game = Game.find_or_create_by(:name => params[:name], genre: params[:genre])
             @user.games << @game
             @user.save
             redirect to("/games")
