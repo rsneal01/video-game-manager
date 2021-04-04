@@ -20,9 +20,9 @@
     end
 
     post '/games' do
-        if Helpers.is_logged_in?(session) && params[:content] != ""
+        if Helpers.is_logged_in?(session) && params[:name] != "" && params[:name] != nil
             @user = User.find_by(params[:id])
-            @game = Game.create(:name => params[:content], genre: params[:genre])
+            @game = Game.create(:name => params[:name], genre: params[:genre])
             @user.games << @game
             @user.save
             redirect to("/games")

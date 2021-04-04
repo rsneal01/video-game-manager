@@ -55,10 +55,15 @@ class UsersController < ApplicationController
     end
   
     get '/users/:slug' do
+      
       # shows all a single users games
       @user = User.find_by_slug(params[:slug])
+      binding.pry
       erb :'/users/show'
     end
   
     end
   end
+
+  # stretch feature: Friends List.
+  # stretch feature: Games has_many users association, allowing Game model to display all the users who play a certain game
