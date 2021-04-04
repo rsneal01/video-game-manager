@@ -1,7 +1,10 @@
 <h1> Welcome, <%= @user.username %> </h1>
 <p>
     <% Game.all.each do |game| %>
-        <%= game.name %>
+        <%= game.name %> -
         <%= game.genre %>
+        <br>
     <% end %>
 </p>
+
+<a href="/games/new"> Add a Game to your Library </a>
