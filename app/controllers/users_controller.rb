@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       
       # shows all a single users games
       @user = User.find_by_slug(params[:slug])
-      binding.pry
+      # binding.pry
       erb :'/users/show'
     end
   
