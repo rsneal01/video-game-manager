@@ -37,7 +37,8 @@
 
     get '/games/:id' do
         if Helpers.is_logged_in?(session)
-            @game = Game.find_by(params[:id])
+            # binding.pry
+            @game = Game.find_by(id: params[:id])
             erb :'/games/show_game'
         else
             redirect to("/login")
@@ -50,7 +51,7 @@
     get '/games/:id/edit' do
         if Helpers.is_logged_in?(session)
             @game = Game.find_by(params[:id])
-            erb :'/games/edit_tweet'
+            erb :'/games/edit_game'
         else
             redirect to("/login")
         end
@@ -60,12 +61,13 @@
         # if user owns game :id, lets them edit, else redirects
         # does not let user edit text with blank content
         @user = User.find_by(params[:id])
-        @tweet = Tweet.find_by(params[:id])
-        if params[:content] != "" && @user.id == @tweet.user_id
-            @tweet.update(content: params[:content])
-            # @tweet.content = params[:content]
+        @game = Game.find_by(params[:id])
+        if params[:name] != "" && @user.id == @game.user_id
+            # binding.pry
+            @game.update(name: params[:name], genre: params[:genre])
+            redirect to("/users/#{@user.slug}")
         else
-            redirect to("/tweets/#{@tweet.id}/edit")
+            redirect to("/games/#{@game.id}/edit")
         end
     end
 

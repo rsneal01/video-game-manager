@@ -5,6 +5,7 @@
 <% @user.games.each do |game| %>
     <%= game.name %> -
     <%= game.genre %>
+    <a href="/games/<%= game.id %>"> View Game Page </a> 
     <br>
 <% end %>
 </p>
