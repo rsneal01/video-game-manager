@@ -12,7 +12,6 @@
 
     get '/games/new' do
         if Helpers.is_logged_in?(session)
-            @user = User.find_by(params[:id])
             erb :'/games/new'
         else
             redirect to("/login")
@@ -21,9 +20,10 @@
 
     post '/games' do
         if Helpers.is_logged_in?(session) && params[:name] != "" && params[:name] != nil
-            # binding.pry
             @user = Helpers.current_user(session)
-            @game = Game.find_or_create_by(:name => params[:name], genre: params[:genre])
+            # binding.pry
+            @game = Game.find_or_create_by(:name => params[:name])
+            @game.genre = params[:genre]
             @user.games << @game
             @user.save
             redirect to("/games")

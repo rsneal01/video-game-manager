@@ -1,6 +1,10 @@
+
+<h1> <%= @user.username %>'s Games: </h1>
+
 <p>
 <% @user.games.each do |game| %>
-    <%= game.name %>
+    <%= game.name %> -
     <%= game.genre %>
+    <br>
 <% end %>
 </p>
