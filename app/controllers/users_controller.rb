@@ -54,8 +54,7 @@ class UsersController < ApplicationController
       end
     end
   
-    get '/users/:slug' do
-      # Why are we displaying ALL games, instead of a specific user's games.  
+    get '/users/:slug' do  
       # shows all a single users games
       @user = Helpers.current_user(session)
       # binding.pry

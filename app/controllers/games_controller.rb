@@ -50,7 +50,7 @@
 
     get '/games/:id/edit' do
         if Helpers.is_logged_in?(session)
-            @game = Game.find_by(params[:id])
+            @game = Game.find_by(id: params[:id])
             erb :'/games/edit_game'
         else
             redirect to("/login")
@@ -60,23 +60,26 @@
     patch '/games/:id' do
         # if user owns game :id, lets them edit, else redirects
         # does not let user edit text with blank content
-        @user = User.find_by(params[:id])
-        @game = Game.find_by(params[:id])
-        if params[:name] != "" && @user.id == @game.user_id
-            # binding.pry
+        @user = Helpers.current_user(session)
+        @game = Game.find_by(id: params[:id])
+        # binding.pry
+        if params[:name] != "" && 
+            
             @game.update(name: params[:name], genre: params[:genre])
             redirect to("/users/#{@user.slug}")
         else
-            redirect to("/games/#{@game.id}/edit")
+            redirect to("/games")
         end
     end
 
     delete '/games/:id' do
         # if logged in and game belongs to user, lets user delete their game
-        @user = User.find_by(params[:id])
-        @game = Game.find_by(params[:id])
-        if Helpers.is_logged_in?(session) && @game.user_id == @user.id
-            @game.delete
+        @user = Helpers.current_user(session)
+        @game = Game.find_by(id: params[:id])
+        if Helpers.is_logged_in?(session) && @user.id == @game.user_id
+            # binding.pry
+            @user.games.delete(@game)
+            redirect to("/users/#{@user.slug}")
         else
             # if not logged in redirect to("/login")
             redirect to("/login")

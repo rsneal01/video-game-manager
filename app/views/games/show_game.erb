@@ -2,6 +2,11 @@
 <br>
 <a href="/games/<%= @game.id %>/edit"> Edit Game </a>
 
+<form action="/games/<%= @game.id %>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete Game">
 
+<! -- 
 # Stretch feature a description scraped from a game website
-# stretch feature game reviews - Game model could have an array for user reviews
+# stretch feature game reviews - Game model could have an array for user reviews 
+-->
