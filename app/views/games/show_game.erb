@@ -1,6 +1,9 @@
 <h1> <%= @game.name %> - <%= @game.genre %> </h1>
 <br>
+
+
 <a href="/games/<%= @game.id %>/edit"> Edit Game </a>
+<br>
 
 <form action="/games/<%= @game.id %>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="delete">
@@ -8,5 +11,5 @@
 
 <! -- 
 # Stretch feature a description scraped from a game website
-# stretch feature game reviews - Game model could have an array for user reviews 
+# stretch feature: game reviews - Game model could have an array for user reviews.  This is more realistic, because a User should not actually be able to edit or create the name of a game; the game devs have that responsibility. 
 -->

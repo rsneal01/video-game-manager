@@ -21,7 +21,6 @@
     post '/games' do
         if Helpers.is_logged_in?(session) && params[:name] != "" && params[:name] != nil
             @user = Helpers.current_user(session)
-            # binding.pry
             @game = Game.find_or_create_by(:name => params[:name])
             @game.genre = params[:genre]
             @user.games << @game
@@ -34,6 +33,13 @@
         # checks to make sure current user = user who is creating game
         # does not allow a game to be blank
     end
+
+    # post 'games/new_from_show' do
+    #     if Helpers.is_logged_in?(session)
+    #         @user = Helpers.current_user(session)
+    #     binding.pry
+    #     end
+    # end
 
     get '/games/:id' do
         if Helpers.is_logged_in?(session)
@@ -63,8 +69,7 @@
         @user = Helpers.current_user(session)
         @game = Game.find_by(id: params[:id])
         # binding.pry
-        if params[:name] != "" && 
-            
+        if params[:name] != "" && @user.id == @game.user_id
             @game.update(name: params[:name], genre: params[:genre])
             redirect to("/users/#{@user.slug}")
         else
