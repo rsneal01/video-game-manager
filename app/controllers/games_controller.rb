@@ -34,13 +34,6 @@
         # does not allow a game to be blank
     end
 
-    # post 'games/new_from_show' do
-    #     if Helpers.is_logged_in?(session)
-    #         @user = Helpers.current_user(session)
-    #     binding.pry
-    #     end
-    # end
-
     get '/games/:id' do
         if Helpers.is_logged_in?(session)
             # binding.pry
@@ -52,6 +45,18 @@
         # provides a link to edit page
         # provides a link to delete page, delete page will just be a form with submit button to POST to delete /games/:id
         # if not logged in redirect to("/login") 
+    end
+
+    post '/games/:id/new_from_show' do
+        if Helpers.is_logged_in?(session)
+            @user = Helpers.current_user(session)
+            @game = Game.find_by(id: params[:id])
+            @user.games << @game
+            @user.save
+            redirect to("/users/#{@user.slug}")
+        else
+            redirect to("/login")
+        end
     end
 
     get '/games/:id/edit' do

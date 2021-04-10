@@ -1,13 +1,14 @@
-<h1> <%= @game.name %> - <%= @game.genre %> </h1>
+<h2> <%= @game.name %> - <%= @game.genre %> </h2>
 <br>
 
+<form action="/games/<%= @game.id %>/new_from_show" method="POST">
+<input type="submit" value="Add Game to Library">
+<br>
 
 <a href="/games/<%= @game.id %>/edit"> Edit Game </a>
 <br>
 
-<form action="/games/<%= @game.id %>" method="POST">
-<input id="hidden" type="hidden" name="_method" value="delete">
-<input type="submit" value="Delete Game">
+
 
 <! -- 
 # Stretch feature a description scraped from a game website
